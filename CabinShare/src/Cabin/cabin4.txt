@@ -1,0 +1,7 @@
+3000
+1.5
+Jim 10
+Erlend 230
+Knut 80
+Norman 160
+Geoff 65

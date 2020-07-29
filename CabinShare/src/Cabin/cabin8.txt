@@ -1,0 +1,5 @@
+2400
+2
+Magnus 35
+Eivind 50 
+Greg 60

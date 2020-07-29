@@ -1,0 +1,6 @@
+2300
+3
+Eivind 40
+Magnus 23
+Karl 64
+Johan 7
