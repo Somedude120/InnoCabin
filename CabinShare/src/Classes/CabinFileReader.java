@@ -38,7 +38,7 @@ public class CabinFileReader {
                     nameAndDistance = scanner.nextLine();
                     String[] stringParts = nameAndDistance.split("\\s+");
                     cabinObj.name = stringParts[0];
-                    cabinObj.distance = stringParts[1];
+                    cabinObj.distance = Float.parseFloat(stringParts[1]);
                     cabinList.add(cabinObj);
                 }
             }

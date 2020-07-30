@@ -4,6 +4,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import Classes.CabinFileCalculator;
 import Classes.CabinFileReader;
 import Models.CabinFileModel;
 
@@ -18,23 +19,27 @@ public class App {
         // CabinFileModel cabinObject = new CabinFileModel();
         ArrayList<CabinFileModel> cabinList = new ArrayList<CabinFileModel>();
         CabinFileReader cabinFileReader = new CabinFileReader();
+        CabinFileCalculator cabinFileCalculator = new CabinFileCalculator();
 
         if(userInput.hasNextInt()) {
             cabinNumber = userInput.nextInt();
             userInput.close();
 
             cabinList = cabinFileReader.createCabinObject(cabinList, cabinNumber);
-            //cabinList.add(cabinObject);
-            System.out.println(cabinList.get(0).cabinRentalCost);
-            System.out.println(cabinList.get(0).travelCost);
+            System.out.println("Rental Cost: " + cabinList.get(0).cabinRentalCost);
+            System.out.println("Travel Cost: " + cabinList.get(0).travelCost);
 
             for (int i = 0; i < cabinList.size(); i++) {
                 System.out.println(cabinList.get(i).name + " " + cabinList.get(i).distance);
-            }    
+            }
+            Float totalCost = cabinFileCalculator.calculator(cabinList);
+
+            System.out.println("Total cost: " + totalCost.toString());
+
             // System.out.println("Cabin Rental: " + cabinList.get(0).cabinRentalCost);
             // System.out.println("Travel Cost: " + cabinList.get(0).travelCost);
             // System.out.println("Name: " + cabinList.get(0).name);
-            // System.out.println("Distance: " + cabinList.get(0).distance);            
+            // System.out.println("Distance: " + cabinList.get(0).distance);
         }
         // else if(userInput.hasNext("all")) {
         //     int textNum = 1;
