@@ -5,4 +5,5 @@ public class CabinFileModel {
     public Float travelCost;
     public String name;
     public Float distance;
+    public float costPerPerson;
 }

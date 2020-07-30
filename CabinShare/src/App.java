@@ -19,22 +19,29 @@ public class App {
         // CabinFileModel cabinObject = new CabinFileModel();
         ArrayList<CabinFileModel> cabinList = new ArrayList<CabinFileModel>();
         CabinFileReader cabinFileReader = new CabinFileReader();
-        CabinFileCalculator cabinFileCalculator = new CabinFileCalculator();
+        CabinFileCalculator cabinFileCalculator = new CabinFileCalculator(cabinList);
 
-        if(userInput.hasNextInt()) {
+        if (userInput.hasNextInt()) {
             cabinNumber = userInput.nextInt();
             userInput.close();
 
             cabinList = cabinFileReader.createCabinObject(cabinList, cabinNumber);
             System.out.println("Rental Cost: " + cabinList.get(0).cabinRentalCost);
             System.out.println("Travel Cost: " + cabinList.get(0).travelCost);
+            System.out.println("Total Cost: " + cabinFileCalculator.totalCost());
+            System.out.println();
 
+            Float travelCostPerPerson = cabinFileCalculator.perPersonCost();
             for (int i = 0; i < cabinList.size(); i++) {
-                System.out.println(cabinList.get(i).name + " " + cabinList.get(i).distance);
+                if(cabinList.get(i).name != null)
+                {
+                    System.out.println("Name: " + cabinList.get(i).name + " " + " Distance: " + cabinList.get(i).distance
+                    + " Travel Cost: " + cabinList.get(i).costPerPerson);
+                }
             }
-            Float totalCost = cabinFileCalculator.calculator(cabinList);
 
-            System.out.println("Total cost: " + totalCost.toString());
+
+            // System.out.println("Total cost: " + travelCostPerPerson.toString());
 
             // System.out.println("Cabin Rental: " + cabinList.get(0).cabinRentalCost);
             // System.out.println("Travel Cost: " + cabinList.get(0).travelCost);
@@ -42,16 +49,15 @@ public class App {
             // System.out.println("Distance: " + cabinList.get(0).distance);
         }
         // else if(userInput.hasNext("all")) {
-        //     int textNum = 1;
-        //     Files.walk(Paths.get("Cabin/"))
-        //     .filter(Files::isRegularFile)
-        //     .forEach(System.out::println);
-            
+        // int textNum = 1;
+        // Files.walk(Paths.get("Cabin/"))
+        // .filter(Files::isRegularFile)
+        // .forEach(System.out::println);
+
         // }
         else
-        userInput.close();
-        
+            userInput.close();
+
         // System.out.println("Name: " + cabinList.get(0).name);
     }
 }
-
