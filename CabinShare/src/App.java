@@ -12,18 +12,18 @@ public class App {
 
         Scanner userInput = new Scanner(System.in);
         int cabinNumber = 0;
-        String command = null;
+        String command = "";
 
         ArrayList<CabinFileModel> cabinList = new ArrayList<CabinFileModel>();
         CabinFileCalculator cabinFileCalculator = new CabinFileCalculator(cabinList);
-        
+
         if (userInput.hasNextInt()) {
             cabinNumber = userInput.nextInt();
             userInput.close();
-            
-            CabinFileReader cabinFileReader = new CabinFileReader(cabinList, cabinNumber, command);
-            cabinList = cabinFileReader.addCabinObjectToList();
-            
+
+            CabinFileReader specCabinFileReader = new CabinFileReader(cabinList, cabinNumber, command);
+            cabinList = specCabinFileReader.addCabinObjectToList();
+
             System.out.println("Rental Cost: " + cabinList.get(0).cabinRentalCost);
             System.out.println("Travel Cost: " + cabinList.get(0).travelCost);
             System.out.println("Total Cost: " + cabinFileCalculator.totalCost());
@@ -31,22 +31,34 @@ public class App {
 
             cabinFileCalculator.perPersonCost();
             for (int i = 0; i < cabinList.size(); i++) {
-                if(cabinList.get(i).name != null)
-                {
-                    System.out.println("Name: " + cabinList.get(i).name + " " + " Distance: " + cabinList.get(i).distance
-                    + " Travel Cost: " + cabinList.get(i).costPerPerson);
+                if (cabinList.get(i).name != null) {
+                    System.out.println("Name: " + cabinList.get(i).name + " " + " Distance: "
+                            + cabinList.get(i).distance + " Travel Cost: " + cabinList.get(i).costPerPerson);
                 }
             }
-        }
-        else if(userInput.hasNext("all"))
-        {
+        } else if (userInput.hasNext("all")) {
             userInput.close();
             System.out.println("Command ALL initiated");
+            CabinFileReader allCabinFileReader = new CabinFileReader(cabinList, cabinNumber, "all");
+            allCabinFileReader.addCabinObjectToList();
+            System.out.println();
+
+            System.out.println("Rental Group: " + cabinList.get(0).groupNumber);
+            System.out.println("Rental Cost: " + cabinList.get(0).cabinRentalCost);
+            System.out.println("Travel Cost: " + cabinList.get(0).travelCost);
+            System.out.println("Total Cost: " + cabinFileCalculator.totalCost());
+            System.out.println();
 
 
-        }
-        else
+            cabinFileCalculator.perPersonCost();
+            for (int i = 0; i < cabinList.size(); i++) {
+                if (cabinList.get(i).name != null) {
+                    System.out.println("Name: " + cabinList.get(i).name + " " + " Distance: "
+                            + cabinList.get(i).distance + " Travel Cost: " + cabinList.get(i).costPerPerson);
+                }
+            }
+        } else
             System.out.println("Not a valid number or command");
-            userInput.close();
+        userInput.close();
     }
 }
