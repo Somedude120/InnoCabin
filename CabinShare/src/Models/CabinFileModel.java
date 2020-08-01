@@ -1,9 +1,10 @@
 package Models;
 
 public class CabinFileModel {
-    public Float cabinRentalCost;
-    public Float travelCost;
+    public float cabinRentalCost;
+    public float travelCost;
     public String name;
-    public Float distance;
+    public float distance;
     public float costPerPerson;
+    public int groupNumber;
 }

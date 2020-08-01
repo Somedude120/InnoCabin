@@ -1,6 +1,3 @@
-import java.io.File;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -15,6 +12,7 @@ public class App {
 
         Scanner userInput = new Scanner(System.in);
         int cabinNumber = 0;
+        String command = null;
 
         ArrayList<CabinFileModel> cabinList = new ArrayList<CabinFileModel>();
         CabinFileCalculator cabinFileCalculator = new CabinFileCalculator(cabinList);
@@ -23,8 +21,8 @@ public class App {
             cabinNumber = userInput.nextInt();
             userInput.close();
             
-            CabinFileReader cabinFileReader = new CabinFileReader(cabinList, cabinNumber);
-            cabinList = cabinFileReader.createCabinObject();
+            CabinFileReader cabinFileReader = new CabinFileReader(cabinList, cabinNumber, command);
+            cabinList = cabinFileReader.addCabinObjectToList();
             
             System.out.println("Rental Cost: " + cabinList.get(0).cabinRentalCost);
             System.out.println("Travel Cost: " + cabinList.get(0).travelCost);
@@ -40,8 +38,15 @@ public class App {
                 }
             }
         }
+        else if(userInput.hasNext("all"))
+        {
+            userInput.close();
+            System.out.println("Command ALL initiated");
+
+
+        }
         else
-            System.out.println("Not a valid number");
+            System.out.println("Not a valid number or command");
             userInput.close();
     }
 }
