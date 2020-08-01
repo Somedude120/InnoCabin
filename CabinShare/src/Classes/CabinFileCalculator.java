@@ -1,7 +1,5 @@
 package Classes;
-
 import java.util.ArrayList;
-
 import Models.CabinFileModel;
 
 public class CabinFileCalculator {
@@ -13,13 +11,9 @@ public class CabinFileCalculator {
     private float personTravelSum;
     private float costPerPerson;
     private float totalTravelCost;
-    private float travelTimePerPerson;
-    private float travelTimeGroupSum;
+    private float travelDistancePerPerson;
+    private float travelDistanceGroupSum;
     private float sizeOfGroup;
-    // private double travelSpeed = 1.5; //This one is missing
-    private double travelSpeed = (Math.random() * ((130 - 30) + 1)) + 30; // This wasn't part of the assignment, and
-                                                                          // cannot calculate time. (Equation for time
-                                                                          // is Time = Distance / Speed)
 
     public CabinFileCalculator(ArrayList<CabinFileModel> CabinList) {
         cabinList = CabinList;
@@ -45,37 +39,40 @@ public class CabinFileCalculator {
     public float perPersonCost() {
         costPerPerson = 0;
         totalTravelCost = totalCost();
-        travelTimeGroupSum = travelTimePerGroup();
+        travelDistanceGroupSum = travelDistancePerGroup();
         sizeOfGroup = groupSize();
 
         for (int i = 0; i < cabinList.size(); i++) {
             if (cabinList.get(i).name != null) {
-                travelTimePerPerson = cabinList.get(i).distance / (float) travelSpeed;
+                travelDistancePerPerson = cabinList.get(i).distance;
 
-                costPerPerson = ((totalTravelCost) * (1 - (travelTimePerPerson / travelTimeGroupSum))
-                        / (sizeOfGroup - 1)) + travelTimePerPerson * (float) travelCost;
+                costPerPerson = rentalCost * (1 - (travelDistancePerPerson) / travelDistanceGroupSum)
+                        / (sizeOfGroup - 1) + (travelDistancePerPerson * (float) travelCost);
 
-                CabinFileModel cabinObject = new CabinFileModel();
-                cabinObject = cabinList.get(i);
-                cabinObject.costPerPerson = costPerPerson;
-                cabinList.set(i, cabinObject);
+                addToCabinList(i, costPerPerson);
             }
         }
         return costPerPerson;
     }
 
-    float travelTimePerGroup() {
-        float travelTimeGroup = 0;
-        travelTimeGroupSum = 0;
+    void addToCabinList(int count, float cost) {
+        CabinFileModel cabinObject = new CabinFileModel();
+        cabinObject = cabinList.get(count);
+        cabinObject.costPerPerson = cost;
+        cabinList.set(count, cabinObject);
+    }
+
+    float travelDistancePerGroup() {
+        travelDistanceGroupSum = 0;
 
         for (int i = 0; i < cabinList.size(); i++) {
             if (cabinList.get(i).name != null) {
-                travelTimeGroup = travelTimeGroup + cabinList.get(i).distance / (float) travelSpeed;
-                travelTimeGroupSum = travelTimeGroup + travelTimeGroupSum;
+                travelDistanceGroupSum = cabinList.get(i).distance + travelDistanceGroupSum;
             }
 
         }
-        return travelTimeGroupSum;
+
+        return travelDistanceGroupSum;
     }
 
     float groupSize() {
