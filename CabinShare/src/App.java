@@ -26,18 +26,24 @@ public class App {
             CabinFileReader specCabinFileReader = new CabinFileReader(cabinList, cabinNumber, command);
             cabinList = specCabinFileReader.addCabinObjectToList();
 
-            System.out.println("Rental Cost: " + cabinList.get(0).cabinRentalCost);
-            System.out.println("Travel Cost: " + cabinList.get(0).travelCost);
-            System.out.println("Total Cost: " + cabinFileCalculator.totalCost());
-            System.out.println();
+            if (cabinList.isEmpty()) {
+                System.exit(0);
+            } else {
 
-            cabinFileCalculator.perPersonCost();
-            for (int i = 0; i < cabinList.size(); i++) {
-                if (cabinList.get(i).name != null) {
-                    System.out.println("Name: " + cabinList.get(i).name + " " + " Distance: "
-                            + cabinList.get(i).distance + " Travel Cost: " + cabinList.get(i).costPerPerson);
+                System.out.println("Rental Cost: " + cabinList.get(0).cabinRentalCost);
+                System.out.println("Travel Cost: " + cabinList.get(0).travelCost);
+                System.out.println("Total Cost: " + cabinFileCalculator.totalCost());
+                System.out.println();
+
+                cabinFileCalculator.perPersonCost();
+                for (int i = 0; i < cabinList.size(); i++) {
+                    if (cabinList.get(i).name != null) {
+                        System.out.println("Name: " + cabinList.get(i).name + " " + " Distance: "
+                                + cabinList.get(i).distance + " Travel Cost: " + cabinList.get(i).costPerPerson);
+                    }
                 }
             }
+
         } else if (userInput.hasNext("all")) {
             userInput.close();
             System.out.println("Command ALL initiated");

@@ -30,11 +30,12 @@ public class CabinFileReader {
         command = Command;
     }
 
-    public ArrayList<CabinFileModel> addCabinObjectToList() throws FileNotFoundException {
+    public ArrayList<CabinFileModel> addCabinObjectToList(){
         if (command == "all") {
             textNum = findAllCabinFiles();
             for (int i = 1; i < textNum + 1; i++) {
-                Scanner scanner = new Scanner(new File("src/Cabin/cabin" + i + ".txt"));
+                try {
+                    Scanner scanner = new Scanner(new File("src/Cabin/cabin" + i + ".txt"));
                 while (scanner.hasNextLine()) {
                     if (scanner.hasNextFloat()) {
                         cabinObj = createCabin(Float.parseFloat(scanner.nextLine()),
@@ -46,23 +47,36 @@ public class CabinFileReader {
                     }
                 }
                 scanner.close();
+                } catch (Exception e) {
+                    System.out.println("An error has occured!");
+                    return cabinList;
+                }
+                
             }
             return cabinList;
 
         } else {
-            Scanner scanner = new Scanner(new File("src/Cabin/cabin" + textNum + ".txt"));
+            try {
+                Scanner scanner = new Scanner(new File("src/Cabin/cabin" + textNum + ".txt"));
 
-            while (scanner.hasNextLine()) {
-                if (scanner.hasNextFloat()) {
-                    cabinObj = createCabin(Float.parseFloat(scanner.nextLine()), Float.parseFloat(scanner.nextLine()),
-                            textNum);
-                    cabinList.add(cabinObj);
-                } else {
-                    cabinObj = createCabinPerson(scanner.nextLine(), textNum);
-                    cabinList.add(cabinObj);
+                while (scanner.hasNextLine()) {
+                    if (scanner.hasNextFloat()) {
+                        cabinObj = createCabin(Float.parseFloat(scanner.nextLine()),
+                                Float.parseFloat(scanner.nextLine()), textNum);
+                        cabinList.add(cabinObj);
+                    } else {
+                        cabinObj = createCabinPerson(scanner.nextLine(), textNum);
+                        cabinList.add(cabinObj);
+                    }
                 }
+                scanner.close();
+
+            } catch (Exception e) {
+                System.out.println("There are no cabin file with that number!");
+                System.out.println("Check if you have the cabin file at the right directory.");
+                return cabinList;
             }
-            scanner.close();
+
             return cabinList;
         }
     }
