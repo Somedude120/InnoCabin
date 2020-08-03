@@ -16,7 +16,7 @@ Instructions:
 4. To simply run and look at the files, use path: CabinProgram/
 
 Folders:
-- CabinProgram: Contains a batchfile that you can simply click and run the program including the sourcecode.
+- CabinProgram: Contains a batchfile that you can simply click (and allow to run) and including the sourcecode.
 - CabinShare: Contains sourcecode
 - CabinShareWithMaven: Contains sourcecode and Maven files for further deployment
 
