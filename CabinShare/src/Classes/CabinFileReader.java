@@ -32,7 +32,7 @@ public class CabinFileReader {
     public ArrayList<CabinFileModel> addCabinObjectToList() throws FileNotFoundException {
         if (command == "all") {
             textNum = findAllCabinFiles();
-            for (int i = 1; i < textNum; i++) {
+            for (int i = 1; i < textNum + 1; i++) {
                 Scanner scanner = new Scanner(new File("src/Cabin/cabin" + i + ".txt"));
                 while (scanner.hasNextLine()) {
                     if (scanner.hasNextFloat()) {
