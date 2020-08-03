@@ -75,6 +75,7 @@
           </dependency>
         </dependencies>
         <configuration>
+          <skip>true</skip>
           <configLocation>com/github/ngeor/checkstyle.xml</configLocation>
           <includeTestSourceDirectory>true</includeTestSourceDirectory>
           <skip>${skipTests}</skip>
@@ -82,7 +83,7 @@
         <executions>
           <execution>
             <id>checkstyle</id>
-            <phase>validate</phase>
+            <phase>none</phase>
             <goals>
               <goal>check</goal>
             </goals>
@@ -107,14 +108,14 @@
           </execution>
           <execution>
             <id>post-unit-test</id>
-            <phase>test</phase>
+            <phase>none</phase>
             <goals>
               <goal>report</goal>
             </goals>
           </execution>
           <execution>
             <id>check-unit-test</id>
-            <phase>test</phase>
+            <phase>none</phase>
             <goals>
               <goal>check</goal>
             </goals>

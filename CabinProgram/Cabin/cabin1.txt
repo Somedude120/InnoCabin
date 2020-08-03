@@ -1,0 +1,6 @@
+1500
+3
+Craig 50
+Melene 25
+Nick 25
+Reggie 80

@@ -4,5 +4,7 @@
         "**/.project": true,
         "**/.settings": true,
         "**/.factorypath": true
-    }
+    },
+    "maven.view": "flat",
+    "java.configuration.updateBuildConfiguration": "interactive"
 }
