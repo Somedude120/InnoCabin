@@ -10,7 +10,6 @@ public class CabinFileCalculator {
     private ArrayList<CabinGroupModel> cabinGroupList;
     private float rentalCost;
     private float travelCost;
-    private float personTravelCost;
     private float personTravelSum;
     private float costPerPerson;
     private float totalTravelCost;
@@ -24,7 +23,6 @@ public class CabinFileCalculator {
         cabinList = CabinList;
         cabinGroupList = CabinGroupList;
         personTravelSum = (float) 0;
-        personTravelCost = (float) 0;
         totalTravelCost = 0;
     }
 
@@ -40,10 +38,8 @@ public class CabinFileCalculator {
                     cabinGroupObj.rentalCost = rentalCost;
                     cabinGroupObj.travelCost = travelCost;
                     cabinGroupList.add(cabinGroupObj);
-                    // System.out.println("Total Cost: " + cabinList.get(i-1).totalTravelCost);
-                    // System.out.println("Group: " + cabinList.get(i-1).groupNumber);
-                    totalTravelCost = 0; // Reset totaltravelcost
-                    personTravelSum = 0; // Reset persontravelsum
+                    totalTravelCost = 0;
+                    personTravelSum = 0;
                 }
                 if (groupNumber > 12) {
                     break;
@@ -56,29 +52,11 @@ public class CabinFileCalculator {
 
                 rentalCost = cabinList.get(i).cabinRentalCost;
                 travelCost = cabinList.get(i).travelCost;
-                // if(!cabinGroupList.isEmpty()){
-                // cabinGroupList.get(groupNumber - 2).rentalCost =
-                // cabinList.get(i).cabinRentalCost;
-                // }
-                // System.out.println("Rental: " + cabinList.get(i).cabinRentalCost);
-                // System.out.println("Travel: " + cabinList.get(i).travelCost);
 
             } else if (cabinList.get(i).name != null && cabinList.get(i).groupNumber == groupNumber) {
-                // totalTravelCost = 0;
-                // personTravelCost = 0;
-                // personTravelSum = 0;
                 cabinList.get(i).perPersonRawTravelCost = cabinList.get(i).distance * travelCost;
-                // personTravelCost = cabinList.get(i).distance * travelCost;
-                // personTravelSum = personTravelCost + personTravelSum;
                 personTravelSum = cabinList.get(i).perPersonRawTravelCost + personTravelSum;
-
-                // System.out.println("tName: " + cabinList.get(i).name);
-
-                // System.out.println("personDistance: " + cabinList.get(i).distance);
-
                 totalTravelCost = personTravelSum + rentalCost;
-                // System.out.println("totalTravelCostNow: " + totalTravelCost);
-
             }
         }
         if (!cabinGroupList.isEmpty() && cabinGroupList.lastIndexOf(cabinGroupObj) + 2 == groupNumber) {
@@ -118,9 +96,6 @@ public class CabinFileCalculator {
                                 * (1 - (travelDistancePerPerson) / cabinGroupList.get(groupNumber - 1).groupDistance)
                                 / (cabinGroupList.get(groupNumber - 1).groupSize - 1)
                                 + (travelDistancePerPerson * (float) cabinGroupList.get(groupNumber - 1).travelCost);
-
-                        // System.out.println("Name: " + cabinList.get(i).name + " CostPer: " + costPerPerson);
-
                         addToCabinList(i, costPerPerson);
                     }
 
@@ -150,14 +125,11 @@ public class CabinFileCalculator {
                 travelDistanceGroupSum = 0;
                 i = i - 1;
             } else if (cabinList.get(i).name != null) {
-                // System.out.println("Name: " + cabinList.get(i).name + " Distance: " +
-                // cabinList.get(i).distance);
                 travelDistanceGroupSum = cabinList.get(i).distance + travelDistanceGroupSum;
-                // System.out.println("Traveldistancegroup: " + travelDistanceGroupSum);
             }
         }
         if (!cabinGroupList.isEmpty()) {
-            cabinGroupList.get(groupNumber -1).groupDistance = travelDistanceGroupSum;
+            cabinGroupList.get(groupNumber - 1).groupDistance = travelDistanceGroupSum;
         }
 
         return travelDistanceGroupSum;
@@ -177,11 +149,10 @@ public class CabinFileCalculator {
                 sizeOfGroup = 0;
             } else if (cabinList.get(i).name != null && cabinList.get(i).groupNumber == groupNumber) {
                 sizeOfGroup = sizeOfGroup + 1;
-                // System.out.println("sizeOfGroup: " + sizeOfGroup);
             }
         }
         if (!cabinGroupList.isEmpty()) {
-            cabinGroupList.get(groupNumber -1).groupSize = sizeOfGroup;
+            cabinGroupList.get(groupNumber - 1).groupSize = sizeOfGroup;
         }
         return sizeOfGroup;
     }

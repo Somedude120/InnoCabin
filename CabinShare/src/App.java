@@ -47,15 +47,15 @@ public class App {
             cabinFileCalculator.totalCost();
             cabinFileCalculator.perPersonCost();
             for (int i = 0; i < cabinList.size(); i++) {
-                // int groupNumberCheck = cabinList.get(i).groupNumber;
-                // int groupNumberGroupCheck = (int) cabinGroupList.get(cabinList.get(i).groupNumber - 1).groupNumber;
                 if (cabinList.get(i).name == null) {
                     System.out.println();
                     System.out.println("Rental Group: " + cabinList.get(i).groupNumber);
                     System.out.println("Rental Cost: " + cabinList.get(i).cabinRentalCost);
                     System.out.println("Travel Cost: " + cabinList.get(i).travelCost);
-                    if(cabinGroupList.get(cabinList.get(i).groupNumber - 1).groupNumber == cabinList.get(i).groupNumber){
-                        System.out.println("Total Cost: " + cabinGroupList.get(cabinList.get(i).groupNumber - 1).totalCost);
+                    if (cabinGroupList.get(cabinList.get(i).groupNumber - 1).groupNumber == cabinList
+                            .get(i).groupNumber) {
+                        System.out.println(
+                                "Total Cost: " + cabinGroupList.get(cabinList.get(i).groupNumber - 1).totalCost);
                     }
 
                     System.out.println();

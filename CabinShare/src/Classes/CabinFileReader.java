@@ -29,6 +29,7 @@ public class CabinFileReader {
         textNum = TextNum;
         command = Command;
     }
+
     public ArrayList<CabinFileModel> addCabinObjectToList() throws FileNotFoundException {
         if (command == "all") {
             textNum = findAllCabinFiles();
@@ -89,12 +90,9 @@ public class CabinFileReader {
 
             List<String> result = walk.map(x -> x.toString()).filter(f -> f.endsWith("txt"))
                     .collect(Collectors.toList());
-
-            // result.forEach(System.out::println);
             return result.size();
 
         } catch (IOException e) {
-            // e.printStackTrace();
             System.out.println("An error has occured.");
         }
         return 0;
