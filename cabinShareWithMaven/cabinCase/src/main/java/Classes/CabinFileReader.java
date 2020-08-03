@@ -1,7 +1,6 @@
 package Classes;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -35,7 +34,7 @@ public class CabinFileReader {
             textNum = findAllCabinFiles();
             for (int i = 1; i < textNum + 1; i++) {
                 try {
-                    Scanner scanner = new Scanner(new File("Cabin/cabin" + i + ".txt"));
+                    Scanner scanner = new Scanner(new File("cabinCase/src/main/java/Cabin/cabin" + i + ".txt"));
                 while (scanner.hasNextLine()) {
                     if (scanner.hasNextFloat()) {
                         cabinObj = createCabin(Float.parseFloat(scanner.nextLine()),
@@ -57,7 +56,7 @@ public class CabinFileReader {
 
         } else {
             try {
-                Scanner scanner = new Scanner(new File("Cabin/cabin" + textNum + ".txt"));
+                Scanner scanner = new Scanner(new File("cabinCase/src/main/java/Cabin/cabin" + textNum + ".txt"));
 
                 while (scanner.hasNextLine()) {
                     if (scanner.hasNextFloat()) {
@@ -100,7 +99,7 @@ public class CabinFileReader {
     }
 
     int findAllCabinFiles() {
-        try (Stream<Path> walk = Files.walk(Paths.get("Cabin/"))) {
+        try (Stream<Path> walk = Files.walk(Paths.get("cabinCase/src/main/java/Cabin/"))) {
 
             List<String> result = walk.map(x -> x.toString()).filter(f -> f.endsWith("txt"))
                     .collect(Collectors.toList());

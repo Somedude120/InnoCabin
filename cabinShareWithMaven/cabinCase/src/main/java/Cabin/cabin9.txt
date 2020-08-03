@@ -1,0 +1,5 @@
+1200
+6
+Else 50
+Anna 75
+Ellen 30

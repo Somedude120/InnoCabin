@@ -1,0 +1,7 @@
+1800
+2.5
+Malin 30
+Liv 60
+Line 45
+Maria 20
+Mary 75
