@@ -20,3 +20,7 @@ Folders:
 - CabinShare: Contains sourcecode
 - CabinShareWithMaven: Contains sourcecode and Maven files for further deployment
 
+Evaluation:
+8.43 out of 10
+
+Mainly needs more commentary.
